@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<?import com.jfoenix.controls.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
+  minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" 
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.toastkid.gui.jfx.cssgen.Controller">
+  <children>
+    <HBox prefHeight="260.0" prefWidth="600.0">
+       <children>
+         <ScrollPane prefHeight="227.0" prefWidth="264.0">
+               <content>
+                  <TreeView fx:id="tree" prefHeight="263.0" prefWidth="259.0" />
+               </content>
+         </ScrollPane>
+         <VBox prefHeight="241.0" prefWidth="135.0">
+           <children>
+             <JFXCheckBox mnemonicParsing="false" text="JFXCheckBox" />
+             <ChoiceBox prefWidth="150.0" />
+             <JFXDatePicker />
+             <ProgressIndicator prefHeight="82.0" prefWidth="135.0" progress="0.30" />
+             <ProgressBar prefHeight="27.0" prefWidth="167.0" progress="0.30" />
+             <JFXSlider />
+             <JFXTextField fx:id="firstColorInput" prefHeight="39.0" prefWidth="167.0" />
+           </children>
+         </VBox>
+         <ListView prefHeight="200.0" prefWidth="200.0">
+           <items>
+             <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Anne"/>
+               <String fx:value="Billy"/>
+               <String fx:value="Carlotta"/>
+               <String fx:value="Deborah"/>
+               <String fx:value="Earl"/>
+             </FXCollections>
+           </items>
+         </ListView>
+       </children>
+   </HBox>
+   <HBox prefHeight="140.0" prefWidth="600.0">
+      <children>
+        <JFXTextArea fx:id="text" prefHeight="140.0" prefWidth="500.0" promptText="Please input text." />
+        <VBox prefWidth="100.0">
+           <children>
+             <JFXButton prefWidth="100.0" text="Post" />
+             <Pagination prefHeight="64.0" prefWidth="173.0" />
+           </children>
+        </VBox>
+      </children>
+   </HBox>
+      <HBox prefHeight="36.0" prefWidth="600.0">
+         <children>
+            
+            <JFXColorPicker fx:id="mainColor" prefWidth="200.0" onAction="#change" />
+            <JFXColorPicker fx:id="subColor"  prefWidth="200.0" onAction="#change" />
+            <JFXButton prefWidth="100.0" text="Save" onAction="#saveAs" />
+         </children>
+      </HBox>
+  </children>
+</VBox>

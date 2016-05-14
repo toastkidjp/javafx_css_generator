@@ -1,0 +1,15 @@
+*.lnk
+.git/
+.gradle/
+.settings/
+bin/
+build/
+gradle/
+gradlew*
+*.exe
+.classpath
+.project
+.class
+.externalToolBuilders/
+*.bin
+generated.css

@@ -1,0 +1,80 @@
+.root {
+    -fx-base: rgba(${main_rgb}, 0.2);
+    -fx-background-color: rgba(${main_rgb}, 0.5);
+}
+
+.text {
+    -fx-font-family: 'Roboto';
+}
+
+.menu {
+    -fx-text-fill: ${text};
+}
+
+.menu-item:focused {
+    -fx-background-color: ${sub};
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: ${text_focused};
+}
+
+.text-field {
+    -fx-background: ${text};
+    -fx-prompt-text-fill: ${text_focused};
+    -fx-text-fill: ${text_focused};
+}
+
+.text-field:focused {
+    -fx-base: ${text};
+    -fx-text-fill: ${main};
+}
+
+.text-area {
+    -fx-background: ${sub_rgb};
+}
+
+.text-area:focused {
+    -fx-base: gray;
+}
+
+.tab-pane {
+    -fx-base: rgba(${sub_rgb}, 0.6);
+    -fx-background-color: ${text_focused};
+}
+
+.list-view {
+    -fx-background-color: rgba(${sub_rgb}, 0.1);
+}
+
+.list-cell {
+    -fx-text-fill: ${text};
+    -fx-background-color: rgba(${sub_rgb}, 1);
+}
+
+.list-cell:even {
+    -fx-text-fill: ${text};
+    -fx-background-color: rgba(${main_rgb}, 1);
+}
+
+.list-cell:hover {
+    -fx-text-fill: ${text_focused};
+    -fx-background-color: ${text};
+}
+
+.list-cell:selected {
+    -fx-text-fill: ${text_focused};
+    -fx-background-color: ${text};
+}
+
+.button {
+    -fx-text-fill: ${text};
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: ${text};
+}
+
+.tab-label {
+    -fx-text-fill: ${text};
+}
