@@ -6,11 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.collections.impl.factory.Maps;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -55,27 +55,40 @@ public class Controller implements Initializable {
     @FXML
     private TreeView<String> tree;
 
+    /** sample view. */
     @FXML
     private TableView<Person> table;
 
+    /** sample view. */
     @FXML
     private TableColumn<Person, String> personId;
+
+    /** sample view. */
     @FXML
     private TableColumn<Person, String> personName;
+
+    /** sample view. */
     @FXML
     private TableColumn<Person, String> isActive;
 
+    /** Opacity value slider. */
     @FXML
     private Slider opacity;
+
+    /** Opacity value indicator. */
     @FXML
     private Label  opacityValue;
 
+    /** CSS file name. */
     @FXML
     private TextField fileName;
 
     /** for use apply stylesheet. */
     private Stage stage;
 
+    /**
+     * save current state css as another file name.
+     */
     @FXML
     private void saveAs() {
         final String text = fileName.getText();
@@ -96,7 +109,7 @@ public class Controller implements Initializable {
 
     /**
      * store messages to text file.
-     * .
+     *
      * @param content
      */
     @FXML
@@ -117,48 +130,23 @@ public class Controller implements Initializable {
         final Color sub   = subColor.getValue();
         final Color input = inputColor.getValue();
 
-        final Map<String, String> params = Maps.mutable.empty();
-        params.put("main_rgb",     makeRgbStr(main));
-        params.put("sub_rgb",      makeRgbStr(sub));
-        params.put("main",         toRgbCode(main));
-        params.put("sub",          toRgbCode(sub));
-        params.put("main_dark",    toRgbCode(main.darker()));
-        params.put("text",         toRgbCode(Color.BLACK));
-        params.put("text_focused", toRgbCode(Color.WHITE));
-        params.put("input",        toRgbCode(input));
+        final Map<String, String> params = new HashMap<>();
+        params.put("main_rgb",     Utilities.makeRgbStr(main));
+        params.put("sub_rgb",      Utilities.makeRgbStr(sub));
+        params.put("main",         Utilities.toRgbCode(main));
+        params.put("sub",          Utilities.toRgbCode(sub));
+        params.put("main_dark",    Utilities.toRgbCode(main.darker()));
+        params.put("text",         Utilities.toRgbCode(Color.BLACK));
+        params.put("text_focused", Utilities.toRgbCode(Color.WHITE));
+        params.put("input",        Utilities.toRgbCode(input));
         params.put("opacity",      Double.toString(opacity.getValue()));
 
         try {
-            save(Presenter.bindArgs("base.css", params));
+            save(Utilities.bindArgs("base.css", params));
         } catch (final IOException e) {
             e.printStackTrace();
         }
         setStyle("generated.css");
-    }
-
-    /**
-     * make rgb string.
-     * @param color Color object
-     * @return ex) 255.0, 255.0, 255.0
-     */
-    private String makeRgbStr(final Color main) {
-        return String.format("%f, %f, %f",
-                main.getRed() * 255.0, main.getGreen() * 255.0, main.getBlue() * 255.0);
-    }
-
-    /**
-     * color to #XXXXXX code.
-     * @param color
-     * @return RGB code
-     * @see <a href="http://stackoverflow.com/questions/17925318/
-     *how-to-get-hex-web-string-from-javafx-colorpicker-color">
-     * How to get hex web String from JavaFX ColorPicker color?</a>
-     */
-    private static String toRgbCode(final Color color) {
-        return String.format( "#%02X%02X%02X",
-            (int)( color.getRed()   * 255 ),
-            (int)( color.getGreen() * 255 ),
-            (int)( color.getBlue()  * 255 ) );
     }
 
     /**
@@ -233,6 +221,14 @@ public class Controller implements Initializable {
 
         opacity.setValue(1.0d);
         opacityValue.textProperty().bind(opacity.valueProperty().asString());
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                Files.delete(Paths.get(TEMP_FILE_PATH));
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
+        }));
     }
 
 }

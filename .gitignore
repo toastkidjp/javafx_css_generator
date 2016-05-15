@@ -13,3 +13,4 @@ gradlew*
 .externalToolBuilders/
 *.bin
 generated.css
+css_generator.jar

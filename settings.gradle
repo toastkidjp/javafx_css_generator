@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'rubber_ducking'
+rootProject.name = 'css_generator'
