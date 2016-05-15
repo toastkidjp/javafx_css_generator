@@ -43,7 +43,7 @@
 }
 
 .text-field:focused {
-    -fx-text-fill: ${main};
+    -fx-text-fill: ${main_dark};
 }
 
 .text-area {

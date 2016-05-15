@@ -45,7 +45,7 @@
          </TabPane>
          <VBox prefHeight="241.0" prefWidth="135.0">
            <children>
-             <CheckBox mnemonicParsing="false" text="JFXCheckBox" />
+             <CheckBox mnemonicParsing="false" text="CheckBox" />
              <ChoiceBox prefWidth="150.0">
                <items>
                  <FXCollections fx:factory="observableArrayList">
@@ -105,9 +105,8 @@
     <VBox prefHeight="200.0" prefWidth="600.0">
       <children>
         <Label text="JavaFX CSS Generator">
-               <font>
-                  <Font size="48.0" />
-               </font></Label>
+          <font><Font size="48.0" /></font>
+        </Label>
         <HBox prefHeight="45.0" prefWidth="600.0">
          <children>
             <JFXColorPicker fx:id="mainColor" onAction="#change" prefWidth="160.0" />
