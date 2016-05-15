@@ -1,6 +1,14 @@
+
 .root {
-    -fx-base: rgba(${main_rgb}, 0.2);
-    -fx-background-color: rgba(${main_rgb}, 0.5);
+    -fx-base: rgba(${main_rgb}, ${opacity});
+}
+
+.root:forcused {
+    -fx-base: rgba(${sub_rgb}, ${opacity});
+}
+
+.color-picker {
+    -fx-base: transparent;
 }
 
 .text {
@@ -19,23 +27,66 @@
     -fx-text-fill: ${text_focused};
 }
 
+.progress-bar {
+    -fx-background-color: ${sub};
+}
+
+.progress-indicator {
+    -fx-base: rgba(${main_rgb}, ${opacity});
+    -fx-progress-color: ${sub};
+}
+
 .text-field {
-    -fx-background: ${text};
+    -fx-background: ${input};
     -fx-prompt-text-fill: ${text_focused};
     -fx-text-fill: ${text_focused};
 }
 
 .text-field:focused {
-    -fx-base: ${text};
     -fx-text-fill: ${main};
 }
 
 .text-area {
-    -fx-background: ${sub_rgb};
+    -fx-background: ${input};
 }
 
 .text-area:focused {
     -fx-base: gray;
+}
+
+.tree-view:focused {
+     -fx-base: rgba(${sub_rgb}, 0.1);
+}
+
+
+.tree-cell:even {
+    -fx-text-fill: ${text};
+    -fx-background-color: rgba(${main_rgb}, ${opacity});
+}
+
+.tree-cell:hover {
+    -fx-text-fill: ${text_focused};
+    -fx-background-color: ${main_dark};
+}
+
+.tree-cell:selected {
+    -fx-text-fill: ${text_focused};
+    -fx-background-color: ${main_dark};
+}
+
+.table-cell:even {
+    -fx-text-fill: ${text};
+    -fx-background-color: rgba(${main_rgb}, ${opacity});
+}
+
+.table-cell:hover {
+    -fx-text-fill: ${text_focused};
+    -fx-background-color: ${main_dark};
+}
+
+.table-cell:selected {
+    -fx-text-fill: ${text_focused};
+    -fx-background-color: ${main_dark};
 }
 
 .tab-pane {
@@ -49,22 +100,22 @@
 
 .list-cell {
     -fx-text-fill: ${text};
-    -fx-background-color: rgba(${sub_rgb}, 1);
+    -fx-background-color: rgba(${sub_rgb}, ${opacity});
 }
 
 .list-cell:even {
     -fx-text-fill: ${text};
-    -fx-background-color: rgba(${main_rgb}, 1);
+    -fx-background-color: rgba(${main_rgb}, ${opacity});
 }
 
 .list-cell:hover {
     -fx-text-fill: ${text_focused};
-    -fx-background-color: ${text};
+    -fx-background-color: ${main_dark};
 }
 
 .list-cell:selected {
     -fx-text-fill: ${text_focused};
-    -fx-background-color: ${text};
+    -fx-background-color: ${main_dark};
 }
 
 .button {

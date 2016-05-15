@@ -1,67 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-
 <?import com.jfoenix.controls.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
-  minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" 
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.toastkid.gui.jfx.cssgen.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.toastkid.gui.jfx.cssgen.Controller">
   <children>
+    <MenuBar minWidth="600.0" prefHeight="25.0" VBox.vgrow="NEVER">
+      <menus>
+        <Menu text="File">
+         <items>
+           <MenuItem onAction="#close" text="Exit" />
+         </items>
+        </Menu>
+      </menus>
+    </MenuBar>
     <HBox prefHeight="260.0" prefWidth="600.0">
        <children>
-         <ScrollPane prefHeight="227.0" prefWidth="264.0">
-               <content>
-                  <TreeView fx:id="tree" prefHeight="263.0" prefWidth="259.0" />
-               </content>
-         </ScrollPane>
+         <TabPane layoutX="0.0" prefHeight="227.0" prefWidth="264.0" tabClosingPolicy="UNAVAILABLE">
+          <tabs>
+            <Tab text="Articles">
+              <tooltip><Tooltip text="Tab content sample." /></tooltip>
+              <content>
+                <VBox prefHeight="227.0" prefWidth="264.0">
+                  <children>
+                    <TreeView fx:id="tree" prefHeight="130.0" prefWidth="259.0" />
+                    <TableView fx:id="table" prefHeight="130.0" prefWidth="259.0">
+                      <columns>
+                        <TableColumn fx:id="personId" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="personName" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="isActive" prefWidth="75.0" text="Active" />
+                      </columns>
+                    </TableView>
+                  </children>
+                </VBox>
+              </content>
+            </Tab>
+          </tabs>
+         </TabPane>
          <VBox prefHeight="241.0" prefWidth="135.0">
            <children>
-             <JFXCheckBox mnemonicParsing="false" text="JFXCheckBox" />
-             <ChoiceBox prefWidth="150.0" />
-             <JFXDatePicker />
+             <CheckBox mnemonicParsing="false" text="JFXCheckBox" />
+             <ChoiceBox prefWidth="150.0">
+               <items>
+                 <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="Anne" />
+                   <String fx:value="Billy" />
+                   <String fx:value="Carlotta" />
+                   <String fx:value="Deborah" />
+                   <String fx:value="Earl" />
+                   <String fx:value="Frank" />
+                   <String fx:value="Gabe" />
+                   <String fx:value="Hugo" />
+                   <String fx:value="Iris" />
+                   <String fx:value="Jorge" />
+                   <String fx:value="Kirk" />
+                   <String fx:value="Lauren" />
+                 </FXCollections>
+               </items>
+             </ChoiceBox>
+             <DatePicker />
              <ProgressIndicator prefHeight="82.0" prefWidth="135.0" progress="0.30" />
              <ProgressBar prefHeight="27.0" prefWidth="167.0" progress="0.30" />
-             <JFXSlider />
-             <JFXTextField fx:id="firstColorInput" prefHeight="39.0" prefWidth="167.0" />
+             <Slider />
+             <TextField fx:id="firstColorInput" prefHeight="39.0" prefWidth="167.0" />
            </children>
          </VBox>
          <ListView prefHeight="200.0" prefWidth="200.0">
            <items>
              <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Anne"/>
-               <String fx:value="Billy"/>
-               <String fx:value="Carlotta"/>
-               <String fx:value="Deborah"/>
-               <String fx:value="Earl"/>
+               <String fx:value="Anne" />
+               <String fx:value="Billy" />
+               <String fx:value="Carlotta" />
+               <String fx:value="Deborah" />
+               <String fx:value="Earl" />
+               <String fx:value="Frank" />
+               <String fx:value="Gabe" />
+               <String fx:value="Hugo" />
+               <String fx:value="Iris" />
+               <String fx:value="Jorge" />
+               <String fx:value="Kirk" />
+               <String fx:value="Lauren" />
              </FXCollections>
            </items>
          </ListView>
        </children>
    </HBox>
-   <HBox prefHeight="140.0" prefWidth="600.0">
+   <HBox prefHeight="70.0" prefWidth="600.0">
       <children>
-        <JFXTextArea fx:id="text" prefHeight="140.0" prefWidth="500.0" promptText="Please input text." />
+        <TextArea fx:id="text" prefHeight="70.0" prefWidth="500.0" promptText="Please input text." />
         <VBox prefWidth="100.0">
            <children>
-             <JFXButton prefWidth="100.0" text="Post" />
+             <Button prefWidth="100.0" text="Post" />
              <Pagination prefHeight="64.0" prefWidth="173.0" />
            </children>
         </VBox>
       </children>
-   </HBox>
-      <HBox prefHeight="36.0" prefWidth="600.0">
+    </HBox>
+    <VBox prefHeight="200.0" prefWidth="600.0">
+      <children>
+        <Label text="JavaFX CSS Generator">
+               <font>
+                  <Font size="48.0" />
+               </font></Label>
+        <HBox prefHeight="45.0" prefWidth="600.0">
          <children>
-            
-            <JFXColorPicker fx:id="mainColor" prefWidth="200.0" onAction="#change" />
-            <JFXColorPicker fx:id="subColor"  prefWidth="200.0" onAction="#change" />
-            <JFXButton prefWidth="100.0" text="Save" onAction="#saveAs" />
+            <JFXColorPicker fx:id="mainColor" onAction="#change" prefWidth="160.0" />
+            <JFXColorPicker fx:id="subColor" onAction="#change" prefWidth="160.0" />
+            <JFXColorPicker fx:id="inputColor" onAction="#change" prefWidth="160.0" />
          </children>
-      </HBox>
+       </HBox>
+       <HBox prefHeight="45.0" prefWidth="600.0">
+         <children>
+            <Label text="Opacity: " />
+            <JFXSlider fx:id="opacity" max="1.0" min="0.0" prefWidth="400.0" value="1.0" />
+            <Label fx:id="opacityValue" />
+         </children>
+       </HBox>
+       <HBox prefHeight="45.0" prefWidth="600.0">
+         <children>
+           <Label text="Save as: " />
+           <JFXTextField fx:id="fileName" prefWidth="200.0" onAction="#saveAs" promptText="Please input css file name." />
+           <JFXButton prefWidth="100.0" onAction="#saveAs" text="Save" />
+           <JFXButton prefWidth="120.0" onAction="#backToDefault" text="Default" />
+         </children>
+       </HBox>
+     </children>
+   </VBox>
   </children>
 </VBox>
