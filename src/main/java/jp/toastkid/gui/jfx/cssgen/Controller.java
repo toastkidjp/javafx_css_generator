@@ -195,7 +195,7 @@ public class Controller implements Initializable {
     @FXML
     private void close() {
         this.stage.close();
-        System.exit(0);
+        //System.exit(0);
     }
 
     @Override
@@ -223,8 +223,12 @@ public class Controller implements Initializable {
         opacityValue.textProperty().bind(opacity.valueProperty().asString());
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            final Path path = Paths.get(TEMP_FILE_PATH);
+            if (!Files.exists(path)) {
+                return;
+            }
             try {
-                Files.delete(Paths.get(TEMP_FILE_PATH));
+                Files.delete(path);
             } catch (final Exception e) {
                 e.printStackTrace();
             }
