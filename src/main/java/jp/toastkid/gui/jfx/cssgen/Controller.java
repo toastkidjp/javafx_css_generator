@@ -11,9 +11,13 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.StringUtils;
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.LineNumberFactory;
 
+import javafx.animation.Transition;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
@@ -25,8 +29,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import jp.toastkid.gui.jfx.cssgen.model.Person;
 
 /**
@@ -38,6 +47,30 @@ public class Controller implements Initializable {
 
     /** temp file path. */
     private static final String TEMP_FILE_PATH = "generated.css";
+
+    /** Zoom increment keyboard shortcut. */
+    private static final KeyCodeCombination ZOOM_INCREMENT
+        = new KeyCodeCombination(KeyCode.SEMICOLON, KeyCombination.CONTROL_DOWN);
+
+    /** Zoom decrement keyboard shortcut. */
+    private static final KeyCodeCombination ZOOM_DECREMENT
+        = new KeyCodeCombination(KeyCode.MINUS, KeyCombination.CONTROL_DOWN);
+
+    /** Save shortcut. */
+    private static final KeyCombination APPLY_CONTENT
+        = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.CONTROL_DOWN);
+
+    /** Save shortcut. */
+    private static final KeyCombination SAVE_AS
+        = new KeyCodeCombination(KeyCode.F12);
+
+    /** Edit shortcut. */
+    private static final KeyCombination SWITCH_EDITOR
+        = new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN);
+
+    /** Root pane. */
+    @FXML
+    private Pane root;
 
     /** firstColor. */
     @FXML
@@ -83,8 +116,17 @@ public class Controller implements Initializable {
     @FXML
     private TextField fileName;
 
+    /** CSS text area. */
+    @FXML
+    private CodeArea cssArea;
+
     /** for use apply stylesheet. */
     private Stage stage;
+
+    /** Opening animation. */
+    private Transition open;
+
+    private Transition close;
 
     /**
      * save current state css as another file name.
@@ -119,6 +161,7 @@ public class Controller implements Initializable {
         } catch (final IOException e) {
             e.printStackTrace();
         }
+        cssArea.replaceText(content);
     }
 
     /**
@@ -182,20 +225,66 @@ public class Controller implements Initializable {
     }
 
     /**
-     * pass Stage object.
+     * TODO
+     * Pass Stage object.
      * @param stage
      */
     protected void setStage(final Stage stage) {
         this.stage = stage;
+        initCodeArea();
+        final ObservableMap<KeyCombination,Runnable> accelerators = stage.getScene().getAccelerators();
+        accelerators.put(SAVE_AS,       this::saveAs);
+        accelerators.put(SWITCH_EDITOR, this::switchEditor);
+        accelerators.put(APPLY_CONTENT, this::applyContent);
     }
 
     /**
-     * close this app.
+     * Switch appearance editor area.
      */
-    @FXML
-    private void close() {
-        this.stage.close();
-        //System.exit(0);
+    private void switchEditor() {
+        if (cssArea.isVisible()) {
+            cssArea.setManaged(false);
+            cssArea.setVisible(false);
+            stage.setWidth(600.0);
+            if (close == null) {
+                close = makeSimpleElasticTransition(1000.0, 600.0);
+                close.setCycleCount(1);
+            }
+            close.play();
+            return;
+        }
+        if (open == null) {
+            open = makeSimpleElasticTransition(600.0, 1000.0);;
+            open.setCycleCount(1);
+        }
+
+        cssArea.setManaged(true);
+        cssArea.setVisible(true);
+        stage.setWidth(1000.0);
+        open.play();
+    }
+
+    private Transition makeSimpleElasticTransition(
+            final double startWidth,
+            final double endWidth
+            ) {
+        return new Transition() {
+            {
+                setCycleDuration(Duration.millis(1000));
+            }
+
+            @Override
+            protected void interpolate(double frac) {
+                final double gap = endWidth - startWidth;
+                stage.setWidth(startWidth + gap * frac);
+            }
+
+        };
+    }
+
+    private void applyContent() {
+        save(cssArea.getText());
+        setStyle("generated.css");
     }
 
     @Override
@@ -233,6 +322,24 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
         }));
+    }
+
+    /**
+     * Initialize CSS' CodeArea.
+     */
+    private void initCodeArea() {
+        cssArea.setParagraphGraphicFactory(LineNumberFactory.get(cssArea));
+        cssArea.setManaged(false);
+        cssArea.setVisible(false);
+    }
+
+    /**
+     * close this app.
+     */
+    @FXML
+    private void close() {
+        this.stage.close();
+        //System.exit(0);
     }
 
 }

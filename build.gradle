@@ -1,4 +1,5 @@
 apply plugin: 'application'
+apply plugin: 'eclipse'
 
 mainClassName   = 'jp.toastkid.gui.jfx.cssgen.Main'
 def defaultEncoding = 'UTF-8'
@@ -18,11 +19,16 @@ configurations {
 dependencies {
     compile 'com.jfoenix:jfoenix:1.0.0'
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.fxmisc.richtext:richtextfx:0.7-M2'
     testCompile 'junit:junit:4.12'
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+eclipse {
+    classpath.defaultOutputDir = file('build')
 }
 
 run {

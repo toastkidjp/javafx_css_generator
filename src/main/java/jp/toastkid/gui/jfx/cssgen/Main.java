@@ -19,7 +19,7 @@ public class Main extends Application {
     /** Application title. */
     private static final String TITLE     = "JavaFX CSS Generator";
 
-    /** fxml ファイル. */
+    /** fxml. */
     private static final String FXML_PATH = "main.fxml";
 
     /** Stage. */
@@ -41,7 +41,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle(TITLE);
         stage.show();
     }

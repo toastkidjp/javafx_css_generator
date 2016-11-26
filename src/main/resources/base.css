@@ -1,4 +1,3 @@
-
 .root {
     -fx-base: rgba(${main_rgb}, ${opacity});
 }
@@ -129,3 +128,4 @@
 .tab-label {
     -fx-text-fill: ${text};
 }
+
