@@ -67,9 +67,9 @@
                         <TreeView fx:id="tree" prefHeight="130.0" prefWidth="259.0" />
                         <TableView fx:id="table" prefHeight="130.0" prefWidth="259.0">
                           <columns>
-                            <TableColumn fx:id="personId" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="personName" prefWidth="75.0" text="Name" />
-                            <TableColumn fx:id="isActive" prefWidth="75.0" text="Active" />
+                            <TableColumn styleClass="tbc" fx:id="personId" prefWidth="75.0" text="ID" />
+                            <TableColumn styleClass="tbc" fx:id="personName" prefWidth="75.0" text="Name" />
+                            <TableColumn styleClass="tbc" fx:id="isActive" prefWidth="75.0" text="Active" />
                           </columns>
                         </TableView>
                       </children>
@@ -102,7 +102,7 @@
                  <DatePicker />
                  <ProgressIndicator prefHeight="82.0" prefWidth="135.0" progress="0.30" />
                  <ProgressBar prefHeight="27.0" prefWidth="167.0" progress="0.30" />
-                 <Slider />
+                 <Slider max="100.0" min="1.0" showTickLabels="true" showTickMarks="true" />
                  <TextField fx:id="firstColorInput" prefHeight="39.0" prefWidth="167.0" />
                </children>
              </VBox>

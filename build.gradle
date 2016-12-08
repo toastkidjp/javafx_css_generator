@@ -43,3 +43,9 @@ jar {
     destinationDir = projectDir
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
+
+task excludedJar(type: Jar) {
+    baseName = rootProject.name + "_excluded"
+    destinationDir = projectDir
+    from sourceSets.main.output
+}
