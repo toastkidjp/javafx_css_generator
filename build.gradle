@@ -19,7 +19,7 @@ configurations {
 dependencies {
     compile 'com.jfoenix:jfoenix:1.0.0'
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'org.fxmisc.richtext:richtextfx:0.7-M2'
+    compile 'org.fxmisc.richtext:richtextfx:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
 }
 
