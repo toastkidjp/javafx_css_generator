@@ -10,6 +10,9 @@ def javafxHome      = System.getenv('JAVA_HOME')
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
 }
 
 configurations {
