@@ -1,7 +1,7 @@
 apply plugin: 'application'
 apply plugin: 'eclipse'
 
-mainClassName   = 'jp.toastkid.gui.jfx.cssgen.Main'
+mainClassName       = 'jp.toastkid.gui.jfx.cssgen.Main'
 def defaultEncoding = 'UTF-8'
 def jdkVersion      = '1.8'
 def javafxHome      = System.getenv('JAVA_HOME')
@@ -20,10 +20,15 @@ configurations {
 }
 
 dependencies {
-    compile 'com.jfoenix:jfoenix:1.0.0'
-    compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'org.fxmisc.richtext:richtextfx:1.0.0-SNAPSHOT'
+    provided 'com.jfoenix:jfoenix:1.0.0'
+    provided 'org.apache.commons:commons-lang3:3.5'
+    provided 'org.fxmisc.richtext:richtextfx:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
+}
+
+compileJava {
+    sourceSets.main.compileClasspath += configurations.provided
+    sourceSets.main.compileClasspath += configurations.testCompile
 }
 
 tasks.withType(JavaCompile) {
@@ -31,7 +36,10 @@ tasks.withType(JavaCompile) {
 }
 
 eclipse {
-    classpath.defaultOutputDir = file('build')
+    classpath.defaultOutputDir = file('bin')
+    classpath {
+        plusConfigurations += [ configurations.provided ]
+    }
 }
 
 run {
@@ -47,8 +55,14 @@ jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
-task excludedJar(type: Jar) {
-    baseName = rootProject.name + "_excluded"
+task fatJar(type: Jar, dependsOn: compileJava) {
+    baseName = project.name + "_executable"
+    manifest {
+        attributes 'Main-Class' : mainClassName
+    }
     destinationDir = projectDir
+    from configurations.compile.collect  { it.isDirectory() ? it : zipTree(it) }
+    from configurations.provided.collect { it.isDirectory() ? it : zipTree(it) }
     from sourceSets.main.output
 }
+
