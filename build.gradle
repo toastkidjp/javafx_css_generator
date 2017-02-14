@@ -1,5 +1,6 @@
 apply plugin: 'application'
 apply plugin: 'eclipse'
+apply plugin: 'jacoco'
 
 mainClassName       = 'jp.toastkid.gui.jfx.cssgen.Main'
 def defaultEncoding = 'UTF-8'
@@ -24,10 +25,14 @@ dependencies {
     provided 'org.apache.commons:commons-lang3:3.5'
     provided 'org.fxmisc.richtext:richtextfx:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'org.testfx:testfx-junit:4.0.5-alpha'
+
 }
 
 compileJava {
     sourceSets.main.compileClasspath += configurations.provided
+    sourceSets.test.compileClasspath += configurations.provided
     sourceSets.main.compileClasspath += configurations.testCompile
 }
 

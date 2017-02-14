@@ -48,14 +48,6 @@ public class Controller implements Initializable {
     /** temp file path. */
     private static final String TEMP_FILE_PATH = "generated.css";
 
-    /** Zoom increment keyboard shortcut. */
-    private static final KeyCodeCombination ZOOM_INCREMENT
-        = new KeyCodeCombination(KeyCode.SEMICOLON, KeyCombination.CONTROL_DOWN);
-
-    /** Zoom decrement keyboard shortcut. */
-    private static final KeyCodeCombination ZOOM_DECREMENT
-        = new KeyCodeCombination(KeyCode.MINUS, KeyCombination.CONTROL_DOWN);
-
     /** Save shortcut. */
     private static final KeyCombination APPLY_CONTENT
         = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.CONTROL_DOWN);
@@ -174,14 +166,14 @@ public class Controller implements Initializable {
         final Color input = inputColor.getValue();
 
         final Map<String, String> params = new HashMap<>();
-        params.put("main_rgb",     Utilities.makeRgbStr(main));
-        params.put("sub_rgb",      Utilities.makeRgbStr(sub));
-        params.put("main",         Utilities.toRgbCode(main));
-        params.put("sub",          Utilities.toRgbCode(sub));
-        params.put("main_dark",    Utilities.toRgbCode(main.darker()));
-        params.put("text",         Utilities.toRgbCode(Color.BLACK));
-        params.put("text_focused", Utilities.toRgbCode(Color.WHITE));
-        params.put("input",        Utilities.toRgbCode(input));
+        params.put("main_rgb",     ColorUtils.makeRgbStr(main));
+        params.put("sub_rgb",      ColorUtils.makeRgbStr(sub));
+        params.put("main",         ColorUtils.toRgbCode(main));
+        params.put("sub",          ColorUtils.toRgbCode(sub));
+        params.put("main_dark",    ColorUtils.toRgbCode(main.darker()));
+        params.put("text",         ColorUtils.toRgbCode(Color.BLACK));
+        params.put("text_focused", ColorUtils.toRgbCode(Color.WHITE));
+        params.put("input",        ColorUtils.toRgbCode(input));
         params.put("opacity",      Double.toString(opacity.getValue()));
 
         try {
@@ -287,6 +279,7 @@ public class Controller implements Initializable {
         setStyle("generated.css");
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         final TreeItem<String> value = new TreeItem<String>("Root");

@@ -9,17 +9,27 @@ import javafx.beans.property.StringProperty;
 
 /**
  * Sample POJO class.
+ *
  * @author Toast kid
  *
  */
 public class Person {
 
+    /** ID. */
     private final long    id;
 
+    /** Name. */
     private final String  name;
 
+    /** Is this object active? */
     private final boolean active;
 
+    /**
+     * Builder.
+     *
+     * @author Toast kid
+     *
+     */
     public static class Builder {
 
         private long    id;
@@ -48,20 +58,36 @@ public class Person {
         }
     }
 
+    /**
+     * Call from internal.
+     * @param b Builder
+     */
     private Person(final Builder b) {
         this.id     = b.id;
         this.name   = b.name;
         this.active = b.active;
     }
 
+    /**
+     * ID property.
+     * @return
+     */
     public LongProperty idProperty() {
         return new SimpleLongProperty(id);
     }
 
+    /**
+     * Name property.
+     * @return
+     */
     public StringProperty nameProperty() {
         return new SimpleStringProperty(name);
     }
 
+    /**
+     * Is active property.
+     * @return
+     */
     public BooleanProperty activeProperty() {
         return new SimpleBooleanProperty(active);
     }

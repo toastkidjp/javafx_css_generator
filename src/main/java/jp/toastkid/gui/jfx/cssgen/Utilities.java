@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.scene.paint.Color;
-
 /**
  * Presenter.
  * @author Toast kid
@@ -24,30 +22,11 @@ public class Utilities {
     private static final Pattern PARAM_TEMPLATE_PATTERN
         = Pattern.compile("\\$\\{(.+?)\\}", Pattern.DOTALL);
 
-
     /**
-     * make rgb string.
-     * @param color Color object
-     * @return ex) 255.0, 255.0, 255.0
+     * Deny make instance.
      */
-    public static String makeRgbStr(final Color main) {
-        return String.format("%f, %f, %f",
-                main.getRed() * 255.0, main.getGreen() * 255.0, main.getBlue() * 255.0);
-    }
-
-    /**
-     * color to #XXXXXX code.
-     * @param color
-     * @return RGB code
-     * @see <a href="http://stackoverflow.com/questions/17925318/
-     *how-to-get-hex-web-string-from-javafx-colorpicker-color">
-     * How to get hex web String from JavaFX ColorPicker color?</a>
-     */
-    public static String toRgbCode(final Color color) {
-        return String.format( "#%02X%02X%02X",
-            (int)( color.getRed()   * 255 ),
-            (int)( color.getGreen() * 255 ),
-            (int)( color.getBlue()  * 255 ) );
+    private Utilities() {
+        // NOP.
     }
 
     /**
