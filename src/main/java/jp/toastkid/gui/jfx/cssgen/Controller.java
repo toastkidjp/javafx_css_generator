@@ -217,7 +217,6 @@ public class Controller implements Initializable {
     }
 
     /**
-     * TODO
      * Pass Stage object.
      * @param stage
      */
